@@ -21,9 +21,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="ko"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex flex-col">
+        <header>
+          <nav className="flex">
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- 6강: 전체 페이지 이동을 다음 강의의 Link와 비교합니다. */}
+            <a href="/" className="p-2 rounded hover:bg-gray-100">
+              메인
+            </a>
+            <a href="/posts" className="p-2 rounded hover:bg-gray-100">
+              글 목록
+            </a>
+          </nav>
+        </header>
+        <main>{children}</main>
+        <footer>푸터</footer>
+      </body>
     </html>
   );
 }
