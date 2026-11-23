@@ -4,6 +4,127 @@
 
 Node.js 26.13.1 LTS, pnpm 12.21.0을 사용합니다.
 
+## 실행 방법 (내 Mac)
+
+프론트와 백엔드를 **터미널 2개**에서 동시에 켜 둡니다. VS Code에서 `` Ctrl + ` ``로 터미널을 열고, 터미널 패널의 **+**로 하나 더 엽니다.
+
+| 터미널 | 폴더 | 명령 | 주소 |
+|---|---|---|---|
+| 1 | `~/projects/p-14175-2-lecture` (프론트) | `pnpm dev` | http://localhost:3000 |
+| 2 | `~/projects/p-14172-2` (백엔드) | `./gradlew bootRun` | http://localhost:8080 |
+
+### 터미널 1: 프론트 (Next.js)
+
+```bash
+cd ~/projects/p-14175-2-lecture
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+### 터미널 2: 백엔드 (Spring Boot)
+
+```bash
+cd ~/projects/p-14172-2
+./gradlew bootRun
+```
+
+로그에 `Started ... Application`이 나오면 준비된 것입니다. Java 25가 필요합니다.
+
+### 강의 태그로 이동
+
+```bash
+git checkout 015-1   # 원하는 강의 태그
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+- 실행 중인 서버는 `Ctrl + C`로 멈춥니다.
+- `Failed to fetch` 오류가 나면 백엔드(터미널 2)가 꺼져 있는 것입니다.
+- 이론 강의(예: 14강)는 태그가 없으니 바로 앞 태그(`013-5`)를 봅니다.
+
+## 브랜치 구성
+
+이 저장소에는 프론트와 백엔드가 **브랜치로 나뉘어** 들어 있습니다.
+
+| 브랜치 | 내용 | 강의 원본 | 태그 |
+|---|---|---|---|
+| `main` | 프론트엔드 (Next.js) | [jhs512/p-14175-3](https://github.com/jhs512/p-14175-3) | `001` ~ `051` |
+| `backend` | 백엔드 (Spring Boot, Java 25) | [jhs512/p-14172-2](https://github.com/jhs512/p-14172-2) | `backend-001` ~ `backend-071-7` |
+
+두 원본 저장소의 태그 이름이 겹쳐서, 백엔드 태그에는 앞에 `backend-`를 붙였습니다. 수업에서 쓰는 백엔드 버전은 `backend-068`입니다.
+
+### 백엔드만 따로 받기
+
+```bash
+cd ~/projects
+git clone --branch backend-068 https://github.com/zoek1211/p-14175-2.git p-14172-2
+cd p-14172-2
+./gradlew bootRun
+```
+
+### 로컬 폴더와 원격 연결
+
+| 폴더 | `origin` (내 저장소) | `upstream` (강의 원본) |
+|---|---|---|
+| `p-14175-2-lecture` | `zoek1211/p-14175-2` → `main` | `jhs512/p-14175-3` |
+| `p-14172-2` | `zoek1211/p-14175-2` → `backend` | `jhs512/p-14172-2` |
+
+강의 원본이 업데이트되면 각 폴더에서 `git fetch upstream --tags`로 받습니다.
+
+## 강의 코드 보기와 내 코드 올리기
+
+강의 코드는 **태그**로 보고, 내 코드는 **내 브랜치**에 올립니다.
+
+### 1. 강의 코드 보기 (태그 체크아웃)
+
+```bash
+git checkout 015-1
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+VS Code: 왼쪽 아래 브랜치 이름 클릭 → 태그 선택.
+
+- 태그는 **보기 전용**입니다. 여기서 고치고 커밋해도 어느 브랜치에도 남지 않습니다.
+- 다른 태그로 옮기기 전에 수정한 내용은 버립니다: `git restore .` (VS Code: Source Control → **Discard Changes**)
+
+### 2. 내 코드 올리기 (내 브랜치)
+
+시작할 강의 태그에서 내 브랜치를 만듭니다 (처음 한 번).
+
+```bash
+git switch -c my-front 015-1
+```
+
+코드를 수정한 뒤 커밋하고 push합니다.
+
+```bash
+git add .
+git commit -m "15강 따라 치기"
+git push -u origin my-front   # 처음 한 번만 -u origin my-front, 이후에는 git push
+```
+
+VS Code: Source Control(`Ctrl + Shift + G`) → 메시지 입력 → **✓ Commit** → **Sync Changes** / **Publish Branch**.
+
+다음에 이어서 작업할 때는 내 브랜치로 돌아옵니다.
+
+```bash
+git switch my-front
+```
+
+### 정리
+
+| 하고 싶은 것 | 명령 |
+|---|---|
+| 강의 코드 보기 | `git checkout 015-1` |
+| 내 브랜치로 돌아오기 | `git switch my-front` |
+| 내 코드 저장 | `git add .` → `git commit -m "..."` |
+| GitHub에 올리기 | `git push` |
+
+백엔드 폴더(`p-14172-2`)도 같은 방법입니다. 로컬 태그 이름은 `068`처럼 그대로 쓰고, 같은 GitHub 저장소를 쓰므로 브랜치 이름은 `my-back`처럼 겹치지 않게 짓습니다.
+
+## 강의 원본 안내
+
 ```powershell
 npm install -g pnpm@12.21.0
 git clone https://github.com/jhs512/p-14175-3.git
