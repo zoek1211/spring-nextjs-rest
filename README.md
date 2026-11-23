@@ -57,7 +57,7 @@ pnpm dev
 
 ```bash
 cd ~/projects
-git clone --branch backend-068 https://github.com/zoek1211/p-14175-2.git p-14172-2
+git clone --branch backend-068 https://github.com/zoek1211/spring-nextjs-rest.git p-14172-2
 cd p-14172-2
 ./gradlew bootRun
 ```
@@ -66,8 +66,8 @@ cd p-14172-2
 
 | 폴더 | `origin` (내 저장소) | `upstream` (강의 원본) |
 |---|---|---|
-| `p-14175-2-lecture` | `zoek1211/p-14175-2` → `main` | `jhs512/p-14175-3` |
-| `p-14172-2` | `zoek1211/p-14175-2` → `backend` | `jhs512/p-14172-2` |
+| `p-14175-2-lecture` | `zoek1211/spring-nextjs-rest` → `main` | `jhs512/p-14175-3` |
+| `p-14172-2` | `zoek1211/spring-nextjs-rest` → `backend` | `jhs512/p-14172-2` |
 
 강의 원본이 업데이트되면 각 폴더에서 `git fetch upstream --tags`로 받습니다.
 
